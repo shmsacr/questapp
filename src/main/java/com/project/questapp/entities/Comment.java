@@ -11,6 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Data
 public class Comment {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id",nullable = false)
