@@ -1,11 +1,16 @@
 package com.project.questapp.services;
 
+import com.project.questapp.entities.Like;
 import com.project.questapp.entities.Post;
 import com.project.questapp.entities.User;
+import com.project.questapp.repos.LikeRepositoryc;
 import com.project.questapp.repos.PostRepository;
 import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
+import com.project.questapp.response.LikeResponse;
 import com.project.questapp.response.PostResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +20,8 @@ import java.util.stream.Collectors;
 @Service
 public class PostService {
    private final PostRepository postRepository;
+
+   private LikeServices likeServices;
    private UserService userService;
 
     public PostService(PostRepository postRepository, UserService userService) {
@@ -22,14 +29,21 @@ public class PostService {
         this.userService = userService;
     }
 
+    @Autowired
+    public void setLikeServices(LikeServices likeServices){
+        this.likeServices =likeServices;
+    }
+
 
     public List<PostResponse> getAllPost(Optional<Long> userId) {
         List<Post> list;
         if(userId.isPresent()){
             list = postRepository.findByUserId(userId.get());
-        }
-        list = postRepository.findAll();
-        return list.stream().map(p -> new PostResponse(p)).collect(Collectors.toList());
+        }else
+            list = postRepository.findAll();
+        return list.stream().map(p -> {
+            List<LikeResponse> likes = likeServices.getAllLikeWithParam(Optional.ofNullable(null),Optional.of(p.getId()));
+            return  new PostResponse(p,likes);}).collect(Collectors.toList());
     }
 
     public Post getOnePostById(Long postId) {
