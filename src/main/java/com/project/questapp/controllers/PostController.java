@@ -5,6 +5,7 @@ import com.project.questapp.requests.PostCreateRequest;
 import com.project.questapp.requests.PostUpdateRequest;
 import com.project.questapp.response.PostResponse;
 import com.project.questapp.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class PostController {
     private PostService postService;
 
+    @Autowired
     public PostController(PostService postService) {
         this.postService = postService;
     }
