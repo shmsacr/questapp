@@ -4,6 +4,7 @@ import com.project.questapp.entities.Like;
 import com.project.questapp.requests.LikeCreateRequest;
 import com.project.questapp.response.LikeResponse;
 import com.project.questapp.services.LikeServices;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 public class LikeControl {
     private LikeServices likeServices;
 
+    @Autowired
     public LikeControl(LikeServices likeServices) {
         this.likeServices = likeServices;
     }
