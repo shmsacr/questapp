@@ -16,12 +16,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class LikeServices {
-    private LikeRepositoryc likeRepositoryc;
-    private UserService userService;
-
+    private final LikeRepositoryc likeRepositoryc;
+    private final UserService userService;
     private PostService postService;
 
-    @Autowired
     public void setPostService(PostService postService){
         this.postService = postService;
     }

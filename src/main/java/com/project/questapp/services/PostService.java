@@ -19,17 +19,17 @@ import java.util.stream.Collectors;
 
 @Service
 public class PostService {
+
    private final PostRepository postRepository;
 
    private LikeServices likeServices;
-   private UserService userService;
 
+   private final UserService userService;
     public PostService(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
         this.userService = userService;
     }
 
-    @Autowired
     public void setLikeServices(LikeServices likeServices){
         this.likeServices =likeServices;
     }

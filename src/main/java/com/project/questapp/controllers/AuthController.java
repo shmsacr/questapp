@@ -4,6 +4,7 @@ import com.project.questapp.entities.User;
 import com.project.questapp.requests.UserRequest;
 import com.project.questapp.security.JwtTokenProvider;
 import com.project.questapp.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,6 +26,7 @@ public class AuthController {
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
     public AuthController(AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider, UserService userService, PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
